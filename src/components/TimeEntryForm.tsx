@@ -5,7 +5,8 @@ const TimeEntryForm = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("Hello World");
+    console.log(inputValue);
+    setInputValue("");
   };
 
   return (
@@ -14,6 +15,7 @@ const TimeEntryForm = () => {
         onChange={(event) => {
           setInputValue(event.target.value);
         }}
+        value={inputValue}
       />
       <p>{inputValue}</p>
       <button type="submit">Absenden</button>
