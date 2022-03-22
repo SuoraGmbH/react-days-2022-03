@@ -1,9 +1,11 @@
+import { TimeEntry } from "../domain/TimeEntry";
+
 interface Props {
-  comment: string;
+  timeEntry: TimeEntry;
 }
 
-const TimeEntryView = ({ comment }: Props) => {
-  return <div>{comment}</div>;
+const TimeEntryView = ({ timeEntry }: Props) => {
+  return <div>{timeEntry.comment}</div>;
 };
 
 export default TimeEntryView;
