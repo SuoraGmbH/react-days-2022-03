@@ -7,7 +7,10 @@ const Counter = () => {
     <div>
       <button
         onClick={() => {
-          setCount(count + 1);
+          // setCount(count + 1); // "Falsch"
+          // setCount(count + 1); // Falsch
+          setCount((prevCount) => prevCount + 1); // Richtig
+          // setCount((count) => count + 1); // Richtig
         }}
       >
         Increment
