@@ -2,6 +2,7 @@ import React from "react";
 import TimeEntryView from "./components/TimeEntryView";
 import Welcome from "./components/Welcome";
 import { TimeEntry } from "./domain/TimeEntry";
+import TimeEntryForm from "./components/TimeEntryForm";
 
 function App() {
   const timeEntry: TimeEntry = {
@@ -13,9 +14,7 @@ function App() {
 
   return (
     <div>
-      <Welcome city="Munich" />
-      <Welcome />
-      <h1>Florian</h1>
+      <TimeEntryForm />
       <TimeEntryView timeEntry={timeEntry} />
     </div>
   );
