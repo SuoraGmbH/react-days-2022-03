@@ -3,7 +3,7 @@ import { TimeEntry } from "../domain/TimeEntry";
 import TimeEntryView from "./TimeEntryView";
 
 interface Props {
-  timeEntries: TimeEntry[];
+  timeEntries: readonly TimeEntry[];
 }
 
 const TimeEntryList: React.FunctionComponent<Props> = ({ timeEntries }) => {
