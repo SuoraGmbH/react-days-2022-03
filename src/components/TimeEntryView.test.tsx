@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import TimeEntryView from "./TimeEntryView";
 import { TimeEntry } from "../domain/TimeEntry";
 
@@ -17,5 +17,10 @@ describe("<TimeEntryView />", function () {
   test("renders according to snapshot", () => {
     const { container } = render(<TimeEntryView timeEntry={timeEntry} />);
     expect(container).toMatchSnapshot();
+  });
+
+  test("renders the time entries comment", () => {
+    render(<TimeEntryView timeEntry={timeEntry} />);
+    screen.getByText("hallo Jennifer", { exact: false });
   });
 });
