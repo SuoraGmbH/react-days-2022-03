@@ -18,19 +18,14 @@ const useTimeEntriesFromServer = (): TimeEntriesFromServerReturnValue => {
   useEffect(() => {
     fetch("http://localhost:3001/timeEntries")
       .then((response) => response.json())
-      .then((timeEntriesBackend: TimeEntryBackend[]) => {
-        const timeEntriesFrontend = timeEntriesBackend.map(
-          (timeEntry): TimeEntry => {
-            return {
-              id: timeEntry.id,
-              comment: timeEntry.comment,
-              start: new Date(timeEntry.start),
-              end: new Date(timeEntry.end),
-            };
-          }
-        );
-        setTimeEntries(timeEntriesFrontend);
-      });
+      .then((timeEntriesBackend: TimeEntryBackend[]): TimeEntry[] =>
+        timeEntriesBackend.map((timeEntry) => ({
+          ...timeEntry,
+          start: new Date(timeEntry.start),
+          end: new Date(timeEntry.end),
+        }))
+      )
+      .then(setTimeEntries);
   }, []);
 
   return { timeEntries: timeEntries ?? [] };
