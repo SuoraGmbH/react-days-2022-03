@@ -2,6 +2,7 @@ import React from "react";
 import { TimeEntry } from "../domain/TimeEntry";
 import TimeEntryForm from "./TimeEntryForm";
 import TimeEntryList from "./TimeEntryList";
+import useTimeEntries from "../hooks/useTimeEntries";
 
 const DynamicTimeEntryList: React.FunctionComponent = () => {
   const { timeEntries, addTimeEntry } = useTimeEntries();
