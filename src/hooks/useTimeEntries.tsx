@@ -6,11 +6,18 @@ export interface UseTimeEntriesHookReturnValue {
   addTimeEntry: (timeEntry: TimeEntry) => void;
 }
 
-const useTimeEntries = (): UseTimeEntriesHookReturnValue => {
-  const [timeEntries, setTimeEntries] = useState<readonly TimeEntry[]>([]);
+const useTimeEntries = (
+  initialState: readonly TimeEntry[] = []
+): UseTimeEntriesHookReturnValue => {
+  const [timeEntries, setTimeEntries] =
+    useState<readonly TimeEntry[]>(initialState);
 
   const addTimeEntry = (timeEntry: TimeEntry) => {
     setTimeEntries((prevTimeEntries) => [...prevTimeEntries, timeEntry]);
+  };
+
+  const addTimeEntries = (timeEntries: TimeEntry[]) => {
+    setTimeEntries((prevTimeEntries) => [...prevTimeEntries, ...timeEntries]);
   };
 
   return {
