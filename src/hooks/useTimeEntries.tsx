@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { TimeEntry } from "../domain/TimeEntry";
 
-const useTimeEntries = () => {
+export interface UseTimeEntriesHookReturnValue {
+  timeEntries: readonly TimeEntry[];
+  addTimeEntry: (timeEntry: TimeEntry) => void;
+}
+
+const useTimeEntries = (): UseTimeEntriesHookReturnValue => {
   const [timeEntries, setTimeEntries] = useState<readonly TimeEntry[]>([]);
 
   const addTimeEntry = (timeEntry: TimeEntry) => {
