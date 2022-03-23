@@ -15,23 +15,10 @@ function App() {
     setTimeEntries([...timeEntries, timeEntry]);
   };
 
-  const timeEntry: TimeEntry = {
-    id: "dhosufnoudfsohdsajioadsio",
-    comment: "München ist eine schöne Stadt!",
-    start: new Date(),
-    end: new Date(),
-  };
-
   return (
     <div>
-      <TimeEntryList />
-      <hr />
-      <DynamicGithubStats />
-      <GithubStats repoName="facebook/react" />
-      <GithubStats repoName="angular/angular" />
-      <Counter />
+      <TimeEntryList timeEntries={timeEntries} />
       <TimeEntryForm onNewTimeEntry={handleNewTimeEntry} />
-      <TimeEntryView timeEntry={timeEntry} />
     </div>
   );
 }
