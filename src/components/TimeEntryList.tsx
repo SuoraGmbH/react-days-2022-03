@@ -24,10 +24,13 @@ const timeEntries: TimeEntry[] = [
 ];
 
 const TimeEntryList: React.FunctionComponent = () => {
-  const elements = timeEntries.map((timeEntry) => (
-    <TimeEntryView timeEntry={timeEntry} key={timeEntry.id} />
-  ));
-  return <>{elements}</>;
+  return (
+    <>
+      {timeEntries.map((timeEntry) => (
+        <TimeEntryView timeEntry={timeEntry} key={timeEntry.id} />
+      ))}
+    </>
+  );
 };
 
 export default TimeEntryList;
