@@ -1,9 +1,6 @@
 import { TimeEntry } from "../domain/TimeEntry";
 import { useEffect, useState } from "react";
-
-interface TimeEntriesFromServerReturnValue {
-  timeEntries: TimeEntry[];
-}
+import { UseTimeEntriesHookReturnValue } from "./useTimeEntries";
 
 interface TimeEntryBackend {
   id: string;
@@ -12,10 +9,9 @@ interface TimeEntryBackend {
   comment: string;
 }
 
-const useTimeEntriesFromServer = (): TimeEntriesFromServerReturnValue => {
+const useTimeEntriesFromServer = (): UseTimeEntriesHookReturnValue => {
   const [timeEntries, setTimeEntries] = useState<TimeEntry[]>();
-
-  useEffect(() => {
+  const fetchData = () => {
     fetch("http://localhost:3001/timeEntries")
       .then((response) => response.json())
       .then((timeEntriesBackend: TimeEntryBackend[]): TimeEntry[] =>
@@ -26,9 +22,21 @@ const useTimeEntriesFromServer = (): TimeEntriesFromServerReturnValue => {
         }))
       )
       .then(setTimeEntries);
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
-  return { timeEntries: timeEntries ?? [] };
+  const addTimeEntry = (timeEntry: TimeEntry) => {
+    fetch("http://localhost:3001/timeEntries", {
+      method: "POST",
+      body: JSON.stringify(timeEntry),
+      headers: { "Content-Type": "application/json" },
+    }).then(fetchData);
+  };
+
+  return { timeEntries: timeEntries ?? [], addTimeEntry };
 };
 
 export default useTimeEntriesFromServer;

@@ -3,16 +3,10 @@ import { TimeEntry } from "../domain/TimeEntry";
 import TimeEntryForm from "./TimeEntryForm";
 import TimeEntryList from "./TimeEntryList";
 import useTimeEntries from "../hooks/useTimeEntries";
+import useTimeEntriesFromServer from "../hooks/useTimeEntriesFromServer";
 
 const DynamicTimeEntryList: React.FunctionComponent = () => {
-  const { addTimeEntry, timeEntries } = useTimeEntries([
-    {
-      id: "!213",
-      start: new Date(),
-      end: new Date(),
-      comment: "initial time entry",
-    },
-  ]);
+  const { addTimeEntry, timeEntries } = useTimeEntriesFromServer();
 
   const handleNewTimeEntry = (timeEntry: TimeEntry) => {
     addTimeEntry(timeEntry);
