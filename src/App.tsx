@@ -6,6 +6,7 @@ import TimeEntryForm from "./components/TimeEntryForm";
 import Counter from "./components/Counter";
 import GithubStats from "./components/GithubStats";
 import DynamicGithubStats from "./components/DynamicGithubStats";
+import TimeEntryList from "./components/TimeEntryList";
 
 function App() {
   const timeEntry: TimeEntry = {
@@ -17,6 +18,8 @@ function App() {
 
   return (
     <div>
+      <TimeEntryList />
+      <hr />
       <DynamicGithubStats />
       <GithubStats repoName="facebook/react" />
       <GithubStats repoName="angular/angular" />
