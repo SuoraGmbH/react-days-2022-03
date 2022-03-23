@@ -10,7 +10,7 @@ interface TimeEntryBackend {
 }
 
 const useTimeEntriesFromServer = (): UseTimeEntriesHookReturnValue => {
-  const [timeEntries, setTimeEntries] = useState<TimeEntry[]>();
+  const [timeEntries, setTimeEntries] = useState<TimeEntry[]>([]);
   const fetchData = () => {
     fetch("http://localhost:3001/timeEntries")
       .then((response) => response.json())
@@ -29,6 +29,7 @@ const useTimeEntriesFromServer = (): UseTimeEntriesHookReturnValue => {
   }, []);
 
   const addTimeEntry = (timeEntry: TimeEntry) => {
+    setTimeEntries((prevTimeEntries) => [...prevTimeEntries, timeEntry]);
     fetch("http://localhost:3001/timeEntries", {
       method: "POST",
       body: JSON.stringify(timeEntry),
