@@ -12,7 +12,7 @@ function App() {
   const [timeEntries, setTimeEntries] = useState<TimeEntry[]>([]);
 
   const handleNewTimeEntry = (timeEntry: TimeEntry) => {
-    setTimeEntries([...timeEntries, timeEntry]);
+    setTimeEntries((prevTimeEntries) => [...prevTimeEntries, timeEntry]);
   };
 
   return (
