@@ -24,7 +24,7 @@ function App() {
       <GithubStats repoName="facebook/react" />
       <GithubStats repoName="angular/angular" />
       <Counter />
-      <TimeEntryForm />
+      <TimeEntryForm onNewTimeEntry={(timeEntry) => console.log(timeEntry)} />
       <TimeEntryView timeEntry={timeEntry} />
     </div>
   );
