@@ -4,6 +4,7 @@ import TimeEntryForm from "./components/TimeEntryForm";
 import TimeEntryList from "./components/TimeEntryList";
 import DynamicTimeEntryList from "./components/DynamicTimeEntryList";
 import useTimeEntries from "./hooks/useTimeEntries";
+import TimeEntryListFromServer from "./components/TimeEntryListFromServer";
 
 function App() {
   const { timeEntries, addTimeEntry } = useTimeEntries();
@@ -13,6 +14,7 @@ function App() {
       <DynamicTimeEntryList />
       <hr />
       <TimeEntryList timeEntries={timeEntries} />
+      <TimeEntryListFromServer />
       <TimeEntryForm onNewTimeEntry={addTimeEntry} />
     </div>
   );
