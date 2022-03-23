@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TimeEntryView from "./components/TimeEntryView";
 import Welcome from "./components/Welcome";
 import { TimeEntry } from "./domain/TimeEntry";
@@ -9,6 +9,12 @@ import DynamicGithubStats from "./components/DynamicGithubStats";
 import TimeEntryList from "./components/TimeEntryList";
 
 function App() {
+  const [timeEntries, setTimeEntries] = useState<TimeEntry[]>([]);
+
+  const handleNewTimeEntry = (timeEntry: TimeEntry) => {
+    setTimeEntries([...timeEntries, timeEntry]);
+  };
+
   const timeEntry: TimeEntry = {
     id: "dhosufnoudfsohdsajioadsio",
     comment: "München ist eine schöne Stadt!",
@@ -24,7 +30,7 @@ function App() {
       <GithubStats repoName="facebook/react" />
       <GithubStats repoName="angular/angular" />
       <Counter />
-      <TimeEntryForm onNewTimeEntry={(timeEntry) => console.log(timeEntry)} />
+      <TimeEntryForm onNewTimeEntry={handleNewTimeEntry} />
       <TimeEntryView timeEntry={timeEntry} />
     </div>
   );
