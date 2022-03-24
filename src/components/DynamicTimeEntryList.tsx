@@ -6,7 +6,7 @@ import useTimeEntries from "../hooks/useTimeEntries";
 import useTimeEntriesFromServer from "../hooks/useTimeEntriesFromServer";
 
 const DynamicTimeEntryList: React.FunctionComponent = () => {
-  const { addTimeEntry, timeEntries } = useTimeEntriesFromServer();
+  const { addTimeEntry, timeEntries } = useTimeEntries();
 
   const handleNewTimeEntry = (timeEntry: TimeEntry) => {
     addTimeEntry(timeEntry);
