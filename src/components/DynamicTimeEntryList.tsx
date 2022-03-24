@@ -4,9 +4,10 @@ import TimeEntryForm from "./TimeEntryForm";
 import TimeEntryList from "./TimeEntryList";
 import useTimeEntries from "../hooks/useTimeEntries";
 import useTimeEntriesFromServer from "../hooks/useTimeEntriesFromServer";
+import useTimeEntriesFromRedux from "../hooks/useTimeEntriesFromRedux";
 
 const DynamicTimeEntryList: React.FunctionComponent = () => {
-  const { addTimeEntry, timeEntries } = useTimeEntries();
+  const { addTimeEntry, timeEntries } = useTimeEntriesFromRedux();
 
   const handleNewTimeEntry = (timeEntry: TimeEntry) => {
     addTimeEntry(timeEntry);
