@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { TimeEntry } from "../domain/TimeEntry";
 interface TimeEntryBackend {
   id: string;
@@ -8,6 +8,8 @@ interface TimeEntryBackend {
 }
 
 const useTimeEntriesWithQuery = () => {
+  const queryClient = useQueryClient();
+  // queryClient.invalidateQueries();
   const { data } = useQuery(
     "timeEntries",
     () => {
