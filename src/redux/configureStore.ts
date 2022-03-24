@@ -1,13 +1,9 @@
 import { combineReducers, createStore } from "redux";
-import { TimeEntry } from "../domain/TimeEntry";
 import {
   timeEntriesReducer,
   TimeEntriesState,
 } from "./timeEntries/timeEntriesReducer";
-import {
-  TimeEntryAddedAction,
-  TimeEntryDeletedAction,
-} from "./timeEntries/action";
+import { TimeEntryAction } from "./timeEntries/action";
 
 export interface ApplicationState {
   timeEntries: TimeEntriesState;
@@ -17,10 +13,7 @@ interface InitAction {
   type: "@@INIT";
 }
 
-export type ApplicationAction =
-  | InitAction
-  | TimeEntryAddedAction
-  | TimeEntryDeletedAction;
+export type ApplicationAction = InitAction | TimeEntryAction;
 
 export const configureStore = () => {
   return createStore(

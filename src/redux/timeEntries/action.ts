@@ -24,12 +24,14 @@ export const addTimeEntryForNow = (comment: string): TimeEntryAddedAction => {
   };
 };
 
-export interface TimeEntryAddedAction {
+interface TimeEntryAddedAction {
   type: "TimeEntry/Added";
   payload: ReduxTimeEntry;
 }
 
-export interface TimeEntryDeletedAction {
+interface TimeEntryDeletedAction {
   type: "TimeEntry/Deleted";
   payload: ReduxTimeEntry;
 }
+
+export type TimeEntryAction = TimeEntryDeletedAction | TimeEntryAddedAction;
