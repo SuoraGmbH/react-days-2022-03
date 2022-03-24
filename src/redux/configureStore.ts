@@ -1,4 +1,5 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
+import { configureStore as configureRtkStore } from "@reduxjs/toolkit";
 import {
   timeEntriesReducer,
   TimeEntriesState,
@@ -16,13 +17,12 @@ interface InitAction {
 
 export type ApplicationAction = InitAction | TimeEntryAction;
 
+export type ApplicationDispatch = ReturnType<typeof configureStore>["dispatch"];
+
 export const configureStore = () => {
-  return createStore(
-    combineReducers({
+  return configureRtkStore({
+    reducer: {
       timeEntries: timeEntriesReducer,
-    }),
-    (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose)(
-      applyMiddleware(thunk)
-    )
-  );
+    },
+  });
 };

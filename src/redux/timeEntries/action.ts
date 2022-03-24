@@ -1,26 +1,27 @@
 import { TimeEntry } from "../../domain/TimeEntry";
 import { ReduxTimeEntry } from "./timeEntriesReducer";
 import { Dispatch } from "redux";
-import { ApplicationAction } from "../configureStore";
+import { ApplicationAction, ApplicationDispatch } from "../configureStore";
 
-export const addTimeEntry = (timeEntry: TimeEntry) => (dispatch: any) => {
-  dispatch({
-    type: "TimeEntry/Added",
-    payload: {
-      ...timeEntry,
-      start: timeEntry.start.toISOString(),
-      end: timeEntry.end.toISOString(),
-    },
-  });
+export const addTimeEntry =
+  (timeEntry: TimeEntry) => (dispatch: ApplicationDispatch) => {
+    dispatch({
+      type: "TimeEntry/Added",
+      payload: {
+        ...timeEntry,
+        start: timeEntry.start.toISOString(),
+        end: timeEntry.end.toISOString(),
+      },
+    });
 
-  fetch("http://localhost:3001/timeEntries", {
-    method: "POST",
-    body: JSON.stringify(timeEntry),
-    headers: { "Content-Type": "application/json" },
-  }).then(() => {
-    dispatch(fetchTimeEntriesFromServer());
-  });
-};
+    fetch("http://localhost:3001/timeEntries", {
+      method: "POST",
+      body: JSON.stringify(timeEntry),
+      headers: { "Content-Type": "application/json" },
+    }).then(() => {
+      dispatch(fetchTimeEntriesFromServer());
+    });
+  };
 
 export const addTimeEntryForNow = (comment: string): TimeEntryAddedAction => {
   return {
