@@ -1,12 +1,14 @@
 import { UseTimeEntriesHookReturnValue } from "./useTimeEntries";
 import { useDispatch, useSelector } from "react-redux";
-import { addTimeEntry, ApplicationState } from "../redux/configureStore";
+import {
+  addTimeEntry,
+  ApplicationState,
+  getAllTimeEntries,
+} from "../redux/configureStore";
 import { TimeEntry } from "../domain/TimeEntry";
 
 const useTimeEntriesFromRedux = (): UseTimeEntriesHookReturnValue => {
-  const timeEntries = useSelector(
-    (state: ApplicationState) => state.timeEntries.timeEntries
-  );
+  const timeEntries = useSelector(getAllTimeEntries);
   const dispatch = useDispatch();
 
   return {
