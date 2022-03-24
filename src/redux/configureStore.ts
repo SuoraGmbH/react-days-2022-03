@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, createStore } from "redux";
+import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import {
   timeEntriesReducer,
   TimeEntriesState,
@@ -21,7 +21,8 @@ export const configureStore = () => {
     combineReducers({
       timeEntries: timeEntriesReducer,
     }),
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
-      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(applyMiddleware(thunk))
+    (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose)(
+      applyMiddleware(thunk)
+    )
   );
 };
