@@ -3,15 +3,23 @@ import { ReduxTimeEntry } from "./timeEntriesReducer";
 import { Dispatch } from "redux";
 import { ApplicationAction } from "../configureStore";
 
-export const addTimeEntry = (timeEntry: TimeEntry): TimeEntryAddedAction => {
-  return {
+export const addTimeEntry = (timeEntry: TimeEntry) => (dispatch: any) => {
+  dispatch({
     type: "TimeEntry/Added",
     payload: {
       ...timeEntry,
       start: timeEntry.start.toISOString(),
       end: timeEntry.end.toISOString(),
     },
-  };
+  });
+
+  fetch("http://localhost:3001/timeEntries", {
+    method: "POST",
+    body: JSON.stringify(timeEntry),
+    headers: { "Content-Type": "application/json" },
+  }).then(() => {
+    dispatch(fetchTimeEntriesFromServer());
+  });
 };
 
 export const addTimeEntryForNow = (comment: string): TimeEntryAddedAction => {
