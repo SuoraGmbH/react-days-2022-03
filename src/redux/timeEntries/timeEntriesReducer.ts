@@ -36,6 +36,11 @@ export const timeEntriesReducer = (
         ...state,
         timeEntries: [...state.timeEntries, action.payload],
       };
+    case "TimeEntry/FetchedFromServer":
+      return {
+        ...state,
+        timeEntries: action.payload,
+      };
   }
   console.log(action);
   return state;

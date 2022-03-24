@@ -1,5 +1,7 @@
 import { TimeEntry } from "../../domain/TimeEntry";
 import { ReduxTimeEntry } from "./timeEntriesReducer";
+import { Dispatch } from "redux";
+import { ApplicationAction } from "../configureStore";
 
 export const addTimeEntry = (timeEntry: TimeEntry): TimeEntryAddedAction => {
   return {
@@ -24,9 +26,26 @@ export const addTimeEntryForNow = (comment: string): TimeEntryAddedAction => {
   };
 };
 
+export const fetchTimeEntriesFromServer =
+  () => (dispatch: Dispatch<ApplicationAction>) => {
+    fetch("http://localhost:3001/timeEntries")
+      .then((response) => response.json())
+      .then((timeEntriesBackend: ReduxTimeEntry[]) => {
+        dispatch({
+          type: "TimeEntry/FetchedFromServer",
+          payload: timeEntriesBackend,
+        });
+      });
+  };
+
 interface TimeEntryAddedAction {
   type: "TimeEntry/Added";
   payload: ReduxTimeEntry;
+}
+
+interface TimeEntryFetchedFromServerAction {
+  type: "TimeEntry/FetchedFromServer";
+  payload: ReduxTimeEntry[];
 }
 
 interface TimeEntryDeletedAction {
@@ -34,4 +53,7 @@ interface TimeEntryDeletedAction {
   payload: ReduxTimeEntry;
 }
 
-export type TimeEntryAction = TimeEntryDeletedAction | TimeEntryAddedAction;
+export type TimeEntryAction =
+  | TimeEntryDeletedAction
+  | TimeEntryAddedAction
+  | TimeEntryFetchedFromServerAction;
